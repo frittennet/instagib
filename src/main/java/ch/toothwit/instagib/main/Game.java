@@ -18,8 +18,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import de.fredo121.lobby.main.LobbyAPI;
-import de.fredo121.lobby.main.LobbyEventHandler;
+import ch.toothwit.lobby.main.LobbyAPI;
+import ch.toothwit.lobby.main.LobbyEventHandler;
 import net.md_5.bungee.api.ChatColor;
 
 public class Game implements LobbyEventHandler { 

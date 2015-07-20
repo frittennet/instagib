@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import ch.toothwit.instagib.events.PlayerEventListener;
 import ch.toothwit.instagib.events.ServerEventListener;
-import de.fredo121.lobby.main.LobbyAPI;
+import ch.toothwit.lobby.main.LobbyAPI;
 import net.md_5.bungee.api.ChatColor; 
 
 public class Instagib extends JavaPlugin {

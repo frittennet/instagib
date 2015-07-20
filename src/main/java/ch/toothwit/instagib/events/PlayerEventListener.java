@@ -25,7 +25,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerPreLoginEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -35,7 +34,7 @@ import ch.toothwit.instagib.main.GamePlayer;
 import ch.toothwit.instagib.main.GameState;
 import ch.toothwit.instagib.main.Target;
 import ch.toothwit.instagib.main.Util;
-import de.fredo121.lobby.main.LobbyAPI;
+import ch.toothwit.lobby.main.LobbyAPI;
 
 
 @SuppressWarnings("deprecation")
