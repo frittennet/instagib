@@ -21,6 +21,8 @@ public class Instagib extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new PlayerEventListener(), this); 
 		Bukkit.getPluginManager().registerEvents(new ServerEventListener(), this); 
 		
+		LobbyAPI.test(); 
+		
 		getLogger().info("Lobby was enabled");
 	}
 
