@@ -121,7 +121,7 @@ public class Game implements LobbyEventHandler {
 		getGamePlayer(victim).deaths++; 
 		getGamePlayer(victim).respawn(); 
 		getGamePlayer(shooter).kills++; 
-		Bukkit.broadcastMessage(ChatColor.RED+victim.getName()+ChatColor.GREEN+" wurde von "+ChatColor.RED+shooter.getName()+ChatColor.GREEN+" getötet."); 
+		Bukkit.broadcastMessage(ChatColor.RED+victim.getName()+ChatColor.GREEN+" wurde von "+ChatColor.RED+shooter.getName()+ChatColor.GREEN+" getoetet."); 
 	}
 	
 	@SuppressWarnings({ "deprecation" })
@@ -151,7 +151,7 @@ public class Game implements LobbyEventHandler {
 		} 
 		Bukkit.broadcastMessage(ChatColor.GOLD+"===================================="); 
 		
-		Bukkit.broadcastMessage(ChatColor.GOLD+"Rückkehr zur Lobby in "+ChatColor.RED+"5"+ChatColor.GOLD+" Sekunden"); 
+		Bukkit.broadcastMessage(ChatColor.GOLD+"Rueckkehr zur Lobby in "+ChatColor.RED+"5"+ChatColor.GOLD+" Sekunden"); 
 		Bukkit.getScheduler().runTaskLater(Instagib.get(), new BukkitRunnable() { 
 			public void run() {                
 				for(Player p : Bukkit.getOnlinePlayers()){ 

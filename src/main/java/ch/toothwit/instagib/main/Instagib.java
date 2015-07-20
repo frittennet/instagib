@@ -44,7 +44,7 @@ public class Instagib extends JavaPlugin {
 			if(sender.hasPermission("instagib.admin")){
 				if(cmd.equalsIgnoreCase("addSpawn")){
 					Settings.get().addSpawnLocation(player.getLocation()); 
-					player.sendMessage(ChatColor.GOLD+"Spawn hinzugefügt."); 
+					player.sendMessage(ChatColor.GOLD+"Spawn hinzugefuegt."); 
 				}
 				else if(cmd.equalsIgnoreCase("stop")){
 					Game.get().setGameState(GameState.STOPPED); 
