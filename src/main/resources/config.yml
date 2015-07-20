@@ -1,0 +1,4 @@
+game:
+  duration: 300
+  spawnLocations: 
+  - world 100.0 100.0 100.0

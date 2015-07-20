@@ -1,0 +1,22 @@
+name: Instagib
+main: de.fredo121.instagib.main.Instagib
+version: 0.1
+author: fredo121
+description: Instagib Plugin using Spigot API 
+depend: [Lobby]
+
+commands:
+  insta:
+    description: Instagib Base Command
+    permission: instagib.use
+  instagib:
+    description: Instagib Base Command
+    permission: instagib.use
+    
+permissions:
+  instagib.use:
+    description: Use Instagib Commands
+    default: true
+  instagib.admin:
+    description: Use Instagib Administration Commands Commands
+    default: op
