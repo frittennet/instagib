@@ -1,4 +1,4 @@
-package de.fredo121.instagib.main;
+package ch.toothwit.instagib.main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Arrow;

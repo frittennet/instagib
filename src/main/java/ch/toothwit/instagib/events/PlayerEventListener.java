@@ -1,4 +1,4 @@
-package de.fredo121.instagib.events;
+package ch.toothwit.instagib.events;
 
 
 import java.util.HashSet;
@@ -30,11 +30,11 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import de.fredo121.instagib.main.Game;
-import de.fredo121.instagib.main.GamePlayer;
-import de.fredo121.instagib.main.GameState;
-import de.fredo121.instagib.main.Target;
-import de.fredo121.instagib.main.Util;
+import ch.toothwit.instagib.main.Game;
+import ch.toothwit.instagib.main.GamePlayer;
+import ch.toothwit.instagib.main.GameState;
+import ch.toothwit.instagib.main.Target;
+import ch.toothwit.instagib.main.Util;
 import de.fredo121.lobby.main.LobbyAPI;
 
 

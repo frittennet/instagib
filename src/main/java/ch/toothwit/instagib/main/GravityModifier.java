@@ -1,4 +1,4 @@
-package de.fredo121.instagib.main;
+package ch.toothwit.instagib.main;
 
 import java.util.HashMap; 
 import java.util.Map.Entry;

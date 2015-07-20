@@ -1,4 +1,4 @@
-package de.fredo121.instagib.main;
+package ch.toothwit.instagib.main;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import de.fredo121.instagib.main.Instagib; 
+import ch.toothwit.instagib.main.Instagib; 
 
 public class Settings {
 	private static Settings instance;

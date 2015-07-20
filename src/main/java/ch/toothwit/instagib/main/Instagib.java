@@ -1,12 +1,13 @@
-package de.fredo121.instagib.main;
+package ch.toothwit.instagib.main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import de.fredo121.instagib.events.PlayerEventListener;
-import de.fredo121.instagib.events.ServerEventListener;
+
+import ch.toothwit.instagib.events.PlayerEventListener;
+import ch.toothwit.instagib.events.ServerEventListener;
 import de.fredo121.lobby.main.LobbyAPI;
 import net.md_5.bungee.api.ChatColor; 
 

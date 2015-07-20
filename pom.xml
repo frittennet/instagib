@@ -22,9 +22,9 @@
       <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
     </repository>
     <repository>
-    <id>dmulloy2-repo</id>
-    <url>http://repo.dmulloy2.net/content/groups/public/</url>
-  </repository>
+      <id>toothwitch-repo</id>
+      <url>http://codeinabottle.org/mavenRepo/</url>
+    </repository>
   </repositories> 
   <dependencies>
     <dependency>
@@ -32,17 +32,10 @@
       <artifactId>spigot-api</artifactId>
       <version>1.8.7-R0.1-SNAPSHOT</version>
     </dependency>
-    <dependency>
-    <groupId>com.comphenix.protocol</groupId>
-    <artifactId>ProtocolLib</artifactId>
-    <version>3.6.4</version>
-  </dependency>
   <dependency>
-      <groupId>de.fredo121</groupId>
+      <groupId>ch.toothwit</groupId>
       <artifactId>lobby</artifactId>
-      <version>0.1</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/../lobby/target/lobby-0.1.jar</systemPath>
+      <version>LATEST</version>
 	</dependency>
   </dependencies>
 </project>

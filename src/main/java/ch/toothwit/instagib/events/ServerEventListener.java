@@ -1,6 +1,4 @@
-package de.fredo121.instagib.events;
-
-import de.fredo121.instagib.main.Game; 
+package ch.toothwit.instagib.events;
 
 import org.bukkit.event.Listener;
 import org.bukkit.Bukkit;
@@ -10,6 +8,8 @@ import org.bukkit.entity.Weather;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
+
+import ch.toothwit.instagib.main.Game;
 
 public class ServerEventListener implements Listener {
 	@EventHandler
