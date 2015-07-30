@@ -4,11 +4,9 @@ package ch.toothwit.instagib.events;
 import java.util.HashSet;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -29,8 +27,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import ch.toothwit.instagib.main.Game;
-import ch.toothwit.instagib.main.GamePlayer;
+import ch.toothwit.instagib.main.Game; 
 import ch.toothwit.instagib.main.GameState;
 import ch.toothwit.instagib.main.Target;
 import ch.toothwit.instagib.main.Util;
@@ -102,7 +99,6 @@ public class PlayerEventListener implements Listener {
 		if(Game.get().getGameState() == GameState.RUNNING){ 
 			if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK){ 
 				Player player = event.getPlayer(); 
-				GamePlayer gamePlayer = Game.get().getGamePlayer(player); 
 				if(player.getItemInHand().getType() == Material.STICK){ 
 					if(!Game.get().getCooldown(player)){ 
 						
@@ -113,7 +109,6 @@ public class PlayerEventListener implements Listener {
 						Player target = Target.getTargetPlayer(player); 
 						Location headLocation = player.getLocation().add(0d, 1.5d, 0d); 
 						Vector vec = player.getLocation().getDirection(); 
-						World playerWorld = player.getLocation().getWorld(); 
 						
 						double blockDistance = maxDistance; 
 						double targetDistance = maxDistance; 
