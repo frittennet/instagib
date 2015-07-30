@@ -1,10 +1,7 @@
 package ch.toothwit.instagib.events;
 
 import org.bukkit.event.Listener;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.WeatherType;
-import org.bukkit.entity.Weather;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
