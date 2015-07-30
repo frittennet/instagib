@@ -97,14 +97,17 @@ public class Game implements LobbyEventHandler {
 			private int timeLeft = Settings.get().getGameDuration(); 
 			public void run() {
 				timeLeft--; 
+				if(timeLeft > 60 && timeLeft % 60 == 0){
+					Bukkit.broadcastMessage(ChatColor.GOLD+"Noch "+ChatColor.RED+""+timeLeft/60+ChatColor.GOLD+" Minuten."); 
+				}
 				if(timeLeft == 60){
-					Bukkit.broadcastMessage(ChatColor.GOLD+"Noch "+ChatColor.RED+"1"+ChatColor.GOLD+" Minute");  
+					Bukkit.broadcastMessage(ChatColor.GOLD+"Noch "+ChatColor.RED+"1"+ChatColor.GOLD+" Minute."); 
 				}
 				if(timeLeft == 30){
-					Bukkit.broadcastMessage(ChatColor.GOLD+"Noch "+ChatColor.RED+"30"+ChatColor.GOLD+" Sekunden");  
+					Bukkit.broadcastMessage(ChatColor.GOLD+"Noch "+ChatColor.RED+"30"+ChatColor.GOLD+" Sekunden.");  
 				}
 				if(timeLeft <= 5 && timeLeft > 0){
-					Bukkit.broadcastMessage(ChatColor.GOLD+"Noch "+ChatColor.RED+timeLeft+ChatColor.GOLD+" Sekunden");  
+					Bukkit.broadcastMessage(ChatColor.GOLD+"Noch "+ChatColor.RED+timeLeft+ChatColor.GOLD+" Sekunden.");  
 				}
 				if(timeLeft <= 0){ 
 					Game.get().endGame(); 
@@ -121,7 +124,7 @@ public class Game implements LobbyEventHandler {
 		getGamePlayer(victim).deaths++; 
 		getGamePlayer(victim).respawn(); 
 		getGamePlayer(shooter).kills++; 
-		Bukkit.broadcastMessage(ChatColor.RED+victim.getName()+ChatColor.GREEN+" wurde von "+ChatColor.RED+shooter.getName()+ChatColor.GREEN+" getoetet."); 
+		Bukkit.broadcastMessage(ChatColor.RED+victim.getName()+ChatColor.GREEN+" wurde von "+ChatColor.RED+shooter.getName()+ChatColor.GREEN+" get\u00F6tet."); 
 	}
 	
 	@SuppressWarnings({ "deprecation" })
@@ -151,7 +154,7 @@ public class Game implements LobbyEventHandler {
 		} 
 		Bukkit.broadcastMessage(ChatColor.GOLD+"===================================="); 
 		
-		Bukkit.broadcastMessage(ChatColor.GOLD+"Rueckkehr zur Lobby in "+ChatColor.RED+"5"+ChatColor.GOLD+" Sekunden"); 
+		Bukkit.broadcastMessage(ChatColor.GOLD+"R\u00FCckkehr zur Lobby in "+ChatColor.RED+"5"+ChatColor.GOLD+" Sekunden"); 
 		Bukkit.getScheduler().runTaskLater(Instagib.get(), new BukkitRunnable() { 
 			public void run() {                
 				for(Player p : Bukkit.getOnlinePlayers()){ 

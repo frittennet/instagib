@@ -46,7 +46,7 @@ public class Instagib extends JavaPlugin {
 			if(sender.hasPermission("instagib.admin")){
 				if(cmd.equalsIgnoreCase("addSpawn")){
 					Settings.get().addSpawnLocation(player.getLocation()); 
-					player.sendMessage(ChatColor.GOLD+"Spawn hinzugefuegt."); 
+					player.sendMessage(ChatColor.GOLD+"Spawn hinzugef\u00FCgt."); 
 				}
 				else if(cmd.equalsIgnoreCase("stop")){
 					Game.get().setGameState(GameState.STOPPED); 
@@ -54,7 +54,7 @@ public class Instagib extends JavaPlugin {
 				}
 				else if(cmd.equalsIgnoreCase("setDuration")){
 					Settings.get().setGameDuration(Integer.parseInt(args[1])); 
-					player.sendMessage(ChatColor.GOLD+"Spieldauer auf"+ChatColor.RED+args[1]+" gesetzt."); 
+					player.sendMessage(ChatColor.GOLD+"Spieldauer auf "+ChatColor.RED+""+args[1]+ChatColor.GOLD+" Sekunden gesetzt."); 
 				}
 				else{
 					player.sendMessage("Unbekannter Befehl."); 
