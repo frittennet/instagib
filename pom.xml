@@ -23,7 +23,7 @@
     </repository>
     <repository>
       <id>toothwitch-repo</id>
-      <url>http://codeinabottle.org/mavenRepo/</url>
+      <url>http://codeinabottle.net/mavenRepo/</url>
     </repository>
     <repository>
 	  <id>confuser-repo</id>
