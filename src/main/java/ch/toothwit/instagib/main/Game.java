@@ -1,5 +1,6 @@
 package ch.toothwit.instagib.main;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -87,7 +88,7 @@ public class Game implements LobbyEventHandler {
 		
 		int n=0; 
 		List<Location> locations = Settings.get().getSpawnLocations(); 
-		Bukkit.broadcastMessage(ChatColor.GOLD+"Spiel gestartet!"); 
+		Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("gameStarted"))); 
 		for(Player player : Bukkit.getOnlinePlayers()){ 
 			player.teleport(locations.get(n%locations.size())); 
 			n++; 
@@ -98,16 +99,16 @@ public class Game implements LobbyEventHandler {
 			public void run() {
 				timeLeft--; 
 				if(timeLeft > 60 && timeLeft % 60 == 0){
-					Bukkit.broadcastMessage(ChatColor.GOLD+"Noch "+ChatColor.RED+""+timeLeft/60+ChatColor.GOLD+" Minuten."); 
+					Bukkit.broadcastMessage(MessageFormat.format(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("minutesLeft")), timeLeft/60)); 
 				}
 				if(timeLeft == 60){
-					Bukkit.broadcastMessage(ChatColor.GOLD+"Noch "+ChatColor.RED+"1"+ChatColor.GOLD+" Minute."); 
+					Bukkit.broadcastMessage(MessageFormat.format(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("minuteLeft")), 1)); 
 				}
 				if(timeLeft == 30){
-					Bukkit.broadcastMessage(ChatColor.GOLD+"Noch "+ChatColor.RED+"30"+ChatColor.GOLD+" Sekunden.");  
+					Bukkit.broadcastMessage(MessageFormat.format(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("secondsLeft")), timeLeft)); 
 				}
 				if(timeLeft <= 5 && timeLeft > 0){
-					Bukkit.broadcastMessage(ChatColor.GOLD+"Noch "+ChatColor.RED+timeLeft+ChatColor.GOLD+" Sekunden.");  
+					Bukkit.broadcastMessage(MessageFormat.format(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("secondsLeft")), timeLeft)); 
 				}
 				if(timeLeft <= 0){ 
 					Game.get().endGame(); 
@@ -124,7 +125,7 @@ public class Game implements LobbyEventHandler {
 		getGamePlayer(victim).deaths++; 
 		getGamePlayer(victim).respawn(); 
 		getGamePlayer(shooter).kills++; 
-		Bukkit.broadcastMessage(ChatColor.RED+victim.getName()+ChatColor.GREEN+" wurde von "+ChatColor.RED+shooter.getName()+ChatColor.GREEN+" get\u00F6tet."); 
+		Bukkit.broadcastMessage(MessageFormat.format(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("killed")), victim.getName(), shooter.getName())); 
 	}
 	
 	@SuppressWarnings({ "deprecation" })
@@ -142,19 +143,19 @@ public class Game implements LobbyEventHandler {
 		     public int compare(GamePlayer o1, GamePlayer o2){
 		         if(o1.kills == o2.kills)
 		             return 0;
-		         return o1.kills < o2.kills ? -1 : 1;
+		         return o1.kills > o2.kills ? -1 : 1;
 		     }
-		});
+		}); 
 		
-		int n=ranked.size(); 
-		Bukkit.broadcastMessage(ChatColor.GOLD+"============="+ChatColor.RED+"Platzierung"+ChatColor.GOLD+"============"); 
+		int n=1 ; 
+		Bukkit.broadcastMessage(ChatColor.GOLD+"===================================="); 
 		for(GamePlayer gamePlayer : ranked){ 
 			Bukkit.broadcastMessage(ChatColor.RED+"        "+n+""+ChatColor.GOLD+". "+gamePlayer.player.getName()+" ["+gamePlayer.kills+"/"+gamePlayer.deaths+"]"); 
-			n--; 
+			n++; 
 		} 
 		Bukkit.broadcastMessage(ChatColor.GOLD+"===================================="); 
 		
-		Bukkit.broadcastMessage(ChatColor.GOLD+"R\u00FCckkehr zur Lobby in "+ChatColor.RED+"5"+ChatColor.GOLD+" Sekunden"); 
+		Bukkit.broadcastMessage(MessageFormat.format(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("lobbyMessage")), 5)); 
 		Bukkit.getScheduler().runTaskLater(Instagib.get(), new BukkitRunnable() { 
 			public void run() {                
 				for(Player p : Bukkit.getOnlinePlayers()){ 

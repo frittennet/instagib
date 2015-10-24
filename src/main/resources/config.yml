@@ -2,3 +2,11 @@ game:
   duration: 300
   spawnLocations: 
   - world 100.0 100.0 100.0
+  weaponName: 'Rifle'
+  gameStarted: '&6Game started!'
+  minutesLeft: '&4{0} &6minutes remaining.' 
+  minuteLeft: '&4{0} &6minute remaining.' 
+  secondsLeft: '&4{0} &6seconds remaining.' 
+  killed: '&4{0} &agot killed by &4{1}!'
+  lobbyMessage: '&6Teleporting back to Lobby in &4{0} &6seconds.'
+  

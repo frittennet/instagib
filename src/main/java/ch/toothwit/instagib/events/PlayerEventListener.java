@@ -122,11 +122,11 @@ public class PlayerEventListener implements Listener {
 							targetDistance = target.getLocation().distance(headLocation); 
 						}
 						
-						if(targetDistance < blockDistance){
-							Game.get().onPlayerKilled(player, target); 
+						if(targetDistance < blockDistance){ 
 							for(int n=0;n<10;n++){
 								target.getWorld().playEffect(target.getLocation().add(0, 1, 0), Effect.STEP_SOUND, 152); 
 							} 
+							Game.get().onPlayerKilled(player, target); 
 							traceShot((int)targetDistance, vec, headLocation); 
 						} 
 						else{

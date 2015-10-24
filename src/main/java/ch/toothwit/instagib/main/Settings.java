@@ -66,7 +66,7 @@ public class Settings {
 		    locs.add(new Location(Bukkit.getWorld(s.split(" ")[0]), Double.parseDouble(s.split(" ")[1]), Double.parseDouble(s.split(" ")[2]), Double.parseDouble(s.split(" ")[3])));
 		}
 		return locs; 
-	}
+	} 
 	
 	public void test(){
 		
@@ -88,5 +88,9 @@ public class Settings {
 	public void setGameDuration(int gameDuration) {
 		this.gameDuration = gameDuration;
 		saveConfig(); 
+	} 
+	
+	public String getString(String key){ 
+		return Settings.get().config.getString("game."+key); 
 	}
 }
