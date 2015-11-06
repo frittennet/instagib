@@ -3,7 +3,7 @@ main: ch.toothwit.instagib.main.Instagib
 version: 0.1
 author: fredo121, Houston9000
 description: Instagib Plugin using Spigot API 
-depend: [Lobby,BarAPI]
+depend: [Lobby]
 
 commands:
   insta:
