@@ -27,7 +27,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import ch.toothwit.instagib.main.Game; 
+import ch.toothwit.instagib.main.Game;
+import ch.toothwit.instagib.main.GamePlayer;
 import ch.toothwit.instagib.main.GameState;
 import ch.toothwit.instagib.main.Target;
 import ch.toothwit.instagib.main.Util;
@@ -162,10 +163,12 @@ public class PlayerEventListener implements Listener {
 	
 	@EventHandler
 	public void onEntityDamageEvent(EntityDamageEvent event){ 
-		if(event.getCause() == EntityDamageEvent.DamageCause.VOID){ 
+		if(Game.get().getGameState() == GameState.RUNNING && event.getCause() == EntityDamageEvent.DamageCause.VOID){ 
 			Entity entity = event.getEntity(); 
 			if(entity != null){ 
-				Game.get().getGamePlayer((Player)event.getEntity()).respawn(); 
+				GamePlayer gamePlayer = Game.get().getGamePlayer((Player)event.getEntity()); 
+				gamePlayer.deaths++; 
+				gamePlayer.respawn(); 
 			}
 		} 
 		event.setCancelled(true); 
