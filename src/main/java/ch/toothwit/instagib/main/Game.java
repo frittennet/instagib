@@ -70,8 +70,8 @@ public class Game implements LobbyEventHandler {
 
 		this.gameState = GameState.LOBBY;
 		this.gamePlayers = new HashMap<String, GamePlayer>();
-		this.scoreboard = Bukkit.getScoreboardManager().getMainScoreboard(); 
-		scoreboard.clearSlot(DisplaySlot.SIDEBAR); 
+		this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard(); 
+		this.scoreboard.clearSlot(DisplaySlot.SIDEBAR); 
 	}
 
 	public void setCooldown(Player player) {
@@ -177,21 +177,28 @@ public class Game implements LobbyEventHandler {
 
 		Collections.sort(ranked, new Comparator<GamePlayer>() {
 			public int compare(GamePlayer o1, GamePlayer o2) {
-				if (o1.kills == o2.kills)
+				if (((float)o1.kills/(float)o2.deaths) == ((float)o2.kills/(float)o2.deaths)) 
 					return 0;
-				return o1.kills > o2.kills ? -1 : 1;
+				return ((float)o1.kills/(float)o2.deaths) > ((float)o2.kills/(float)o2.deaths) ? -1 : 1;
 			}
 		});
 
-		int n = 1;
-		Bukkit.broadcastMessage(ChatColor.GOLD + "====================================");
-		for (GamePlayer gamePlayer : ranked) {
-			Bukkit.broadcastMessage(ChatColor.RED + "        " + n + "" + ChatColor.GOLD + ". "
-					+ gamePlayer.player.getName() + " [" + gamePlayer.kills + "/" + gamePlayer.deaths + "]");
-			n++;
-		}
-		Bukkit.broadcastMessage(ChatColor.GOLD + "====================================");
+		int n = 0;
+		Bukkit.broadcastMessage(ChatColor.GOLD + "Player [Kills/Tode/KD]"); 
+		
+		Columns columns = new Columns(); 
 
+		for (GamePlayer gamePlayer : ranked) { 
+			columns.addLine(
+					ChatColor.RED + "" + n + "" + ChatColor.GOLD + ".", 
+					ChatColor.GOLD + gamePlayer.player.getName(),
+					ChatColor.GOLD + "" + gamePlayer.kills+"",
+					ChatColor.GOLD + "" + gamePlayer.deaths+"",  
+					ChatColor.GOLD + String.format("%.2f", ((float)gamePlayer.kills/(float)gamePlayer.deaths))
+			); 
+			n++; 
+		} 
+		
 		Bukkit.broadcastMessage(MessageFormat
 				.format(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("lobbyMessage")), 5));
 		Bukkit.getScheduler().runTaskLater(Instagib.get(), new BukkitRunnable() {
