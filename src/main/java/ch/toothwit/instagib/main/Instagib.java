@@ -49,7 +49,7 @@ public class Instagib extends JavaPlugin {
 					player.sendMessage(ChatColor.GOLD+"Spawn hinzugef\u00FCgt."); 
 				}
 				else if(cmd.equalsIgnoreCase("stop")){
-					Game.get().setGameState(GameState.STOPPED); 
+					Game.get().setGameState(GameState.STOPPED);  
 					player.sendMessage(ChatColor.GOLD+"Spiel gestoppt."); 
 				}
 				else if(cmd.equalsIgnoreCase("setDuration")){

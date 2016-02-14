@@ -21,7 +21,7 @@
       <id>spigot-repo</id>
       <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
     </repository>
-    <repository>
+    <repository> 
       <id>toothwitch-repo</id>
       <url>http://codeinabottle.net/mavenRepo/</url>
     </repository>

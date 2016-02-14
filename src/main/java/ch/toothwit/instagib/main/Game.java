@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Map.Entry;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -24,7 +26,7 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
 import ch.toothwit.lobby.main.LobbyAPI;
-import ch.toothwit.lobby.main.LobbyEventHandler;
+import ch.toothwit.lobby.main.LobbyEventHandler; 
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -64,13 +66,18 @@ public class Game implements LobbyEventHandler {
 		return instance;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void reload() {
 		LobbyAPI.reload();
 		Bukkit.getScheduler().cancelTask(countdownTask);
 
 		this.gameState = GameState.LOBBY;
 		this.gamePlayers = new HashMap<String, GamePlayer>();
-		this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard(); 
+		this.scoreboard = Bukkit.getScoreboardManager().getMainScoreboard(); 
+		for(OfflinePlayer player : scoreboard.getPlayers())
+		{
+			scoreboard.resetScores(player);
+		}
 		this.scoreboard.clearSlot(DisplaySlot.SIDEBAR); 
 	}
 
@@ -110,7 +117,7 @@ public class Game implements LobbyEventHandler {
 		}
 		this.gameState = GameState.RUNNING;
 
-		int n = 0;
+		int n = 0; 
 		List<Location> locations = Settings.get().getSpawnLocations();
 		Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("gameStarted")));
 		for (Player player : Bukkit.getOnlinePlayers()) {
@@ -164,6 +171,11 @@ public class Game implements LobbyEventHandler {
 		score.setScore(getGamePlayer(shooter).kills); 
 	}
 
+	public static float calcKD(int kills, int deaths){ 
+		deaths = deaths > 0 ? deaths : 1; 
+		return (float)kills/(float)deaths; 
+	}
+	
 	@SuppressWarnings({ "deprecation" })
 	public void endGame() {
 		Bukkit.getScheduler().cancelTask(countdownTask);
@@ -177,27 +189,28 @@ public class Game implements LobbyEventHandler {
 
 		Collections.sort(ranked, new Comparator<GamePlayer>() {
 			public int compare(GamePlayer o1, GamePlayer o2) {
-				if (((float)o1.kills/(float)o2.deaths) == ((float)o2.kills/(float)o2.deaths)) 
+				if (calcKD(o1.kills, o2.deaths) == calcKD(o2.kills, o2.deaths)) 
 					return 0;
-				return ((float)o1.kills/(float)o2.deaths) > ((float)o2.kills/(float)o2.deaths) ? -1 : 1;
+				return calcKD(o1.kills, o2.deaths) > calcKD(o2.kills, o2.deaths) ? -1 : 1;
 			}
 		});
 
-		int n = 0;
-		Bukkit.broadcastMessage(ChatColor.GOLD + "Player [Kills/Tode/KD]"); 
+		int n = 0; 
 		
-		Columns columns = new Columns(); 
-
+		String message = String.format("%2s %20s %5s %4s %4s" , "#", "Name", "Kills", "Tode", "KD").toString()+"\n"; 
+		
 		for (GamePlayer gamePlayer : ranked) { 
-			columns.addLine(
-					ChatColor.RED + "" + n + "" + ChatColor.GOLD + ".", 
-					ChatColor.GOLD + gamePlayer.player.getName(),
-					ChatColor.GOLD + "" + gamePlayer.kills+"",
-					ChatColor.GOLD + "" + gamePlayer.deaths+"",  
-					ChatColor.GOLD + String.format("%.2f", ((float)gamePlayer.kills/(float)gamePlayer.deaths))
-			); 
+			message += String.format("%2s %20s %3s %3s %4s", 
+	        		(n+1) + ".", 
+	        		gamePlayer.player.getDisplayName(), 
+	        		gamePlayer.kills+"", 
+	        		gamePlayer.deaths+"", 
+	        		String.format("%.2f", calcKD(gamePlayer.kills, gamePlayer.deaths)) 
+	        ).toString()+"\n"; 
 			n++; 
 		} 
+		
+		Bukkit.broadcastMessage(ChatColor.GOLD + message); 
 		
 		Bukkit.broadcastMessage(MessageFormat
 				.format(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("lobbyMessage")), 5));
