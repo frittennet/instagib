@@ -54,7 +54,7 @@ public class Settings {
 	public void setLocationList(String path, List<Location> locations){
 		List<String> locs = new ArrayList<String>();
 		for(Location loc : locations){
-		    locs.add(loc.getWorld().getName() + " " + loc.getX() + " " + loc.getY() + " " + loc.getZ());
+		    locs.add(loc.getWorld().getName() + " " + loc.getX() + " " + loc.getY() + " " + loc.getZ() + " " + loc.getYaw() + " " + loc.getPitch());
 		}
 		config.set(path, locs); 
 	}
@@ -62,8 +62,16 @@ public class Settings {
 	public List<Location> getLocationList(String path){ 
 		List<String> locstrings = config.getStringList(path);
 		List<Location> locs = new ArrayList<Location>();
-		for(String s : locstrings){
-		    locs.add(new Location(Bukkit.getWorld(s.split(" ")[0]), Double.parseDouble(s.split(" ")[1]), Double.parseDouble(s.split(" ")[2]), Double.parseDouble(s.split(" ")[3])));
+		for(String s : locstrings){ 
+			String[] split = s.split(" "); 
+		    locs.add(new Location(
+		    		Bukkit.getWorld(split[0]), 
+		    		Double.parseDouble(split[1]), 
+		    		Double.parseDouble(split[2]), 
+		    		Double.parseDouble(split[3]), 
+		    		split.length > 4 ? Float.parseFloat( split[4]) : 0.0f , 
+		    		split.length > 5 ? Float.parseFloat( split[5]) : 0.0f            
+		    		));
 		}
 		return locs; 
 	} 
@@ -81,6 +89,11 @@ public class Settings {
 		saveConfig(); 
 	}
 
+	public void clearSpawnLocations(){
+		this.spawnLocations.clear(); 
+		saveConfig(); 
+	}
+	
 	public int getGameDuration() {
 		return gameDuration;
 	}

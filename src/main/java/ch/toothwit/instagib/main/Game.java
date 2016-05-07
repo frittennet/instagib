@@ -134,6 +134,7 @@ public class Game implements LobbyEventHandler {
 					Bukkit.broadcastMessage(MessageFormat.format(
 							ChatColor.translateAlternateColorCodes('&', Settings.get().getString("minutesLeft")),
 							timeLeft / 60));
+					
 				}
 				if (timeLeft == 60) {
 					Bukkit.broadcastMessage(MessageFormat.format(
@@ -197,15 +198,13 @@ public class Game implements LobbyEventHandler {
 
 		int n = 0; 
 		
-		String message = String.format("%2s %20s %5s %4s %4s" , "#", "Name", "Kills", "Tode", "KD").toString()+"\n"; 
+		String message = String.format("%3s | %2s | %s" , "#", "KD", "Name").toString()+"\n"; 
 		
 		for (GamePlayer gamePlayer : ranked) { 
-			message += String.format("%2s %20s %3s %3s %4s", 
-	        		(n+1) + ".", 
-	        		gamePlayer.player.getDisplayName(), 
-	        		gamePlayer.kills+"", 
-	        		gamePlayer.deaths+"", 
-	        		String.format("%.2f", calcKD(gamePlayer.kills, gamePlayer.deaths)) 
+			message += String.format("%2d. | %.1f | %s", 
+	        		(n+1), 
+	        		calcKD(gamePlayer.kills, gamePlayer.deaths), 
+	        		gamePlayer.player.getDisplayName() 
 	        ).toString()+"\n"; 
 			n++; 
 		} 

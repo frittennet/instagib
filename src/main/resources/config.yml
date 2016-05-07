@@ -1,7 +1,7 @@
 game:
   duration: 300
   spawnLocations: 
-  - world 100.0 100.0 100.0
+  - world 100.0 100.0 100.0 0.0 0.0
   weaponName: 'Rifle'
   gameStarted: '&6Game started!'
   minutesLeft: '&4{0} &6minutes remaining.' 

@@ -16,8 +16,14 @@ public class GamePlayer {
 	
 	public void respawn(){
 		List<Location> respawns = Settings.get().getSpawnLocations(); 
-		int random = (int)(Math.random()*respawns.size()); 
-		player.teleport(respawns.get(random));  
+		
+		int random; 
+		do {
+			random = (int)(Math.random()*respawns.size()); 
+		}
+		while(respawns.get(random).distance(this.player.getLocation()) < 2.5f); 
+		
+		this.player.teleport(respawns.get(random)); 
 	}
 
 	public boolean getAllowShooting() {

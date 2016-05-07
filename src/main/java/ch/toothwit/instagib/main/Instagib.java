@@ -35,37 +35,64 @@ public class Instagib extends JavaPlugin {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) { 
-		if (command.getName().equalsIgnoreCase("insta") || command.getName().equalsIgnoreCase("instagib")) { 
-			String cmd = args[0]; 
-			Player player = (Player)sender; 
-			if(sender.hasPermission("instagib.user")){
-				if(cmd.equalsIgnoreCase("leave")){
-					Util.SendToBungeeServer(LobbyAPI.getBungeeLobbyServer(), (Player)sender);
+		if ((command.getName().equalsIgnoreCase("insta") || command.getName().equalsIgnoreCase("instagib"))) { 
+			if(args.length > 0){
+				String cmd = args[0]; 
+				Player player = (Player)sender; 
+				boolean unknownUserCommand = false; 
+				boolean unknownAdminCommand = false; 
+				if(sender.hasPermission("instagib.user")){
+					if(cmd.equalsIgnoreCase("leave")){
+						Util.SendToBungeeServer(LobbyAPI.getBungeeLobbyServer(), (Player)sender);
+					} 
+					else {
+						unknownUserCommand = true; 
+					}
 				}
+				if(sender.hasPermission("instagib.admin")){
+					if(cmd.equalsIgnoreCase("addSpawn")){
+						Settings.get().addSpawnLocation(player.getLocation()); 
+						player.sendMessage(ChatColor.GOLD+"Spawn hinzugef\u00FCgt."); 
+					}
+					else if(cmd.equalsIgnoreCase("stop")){
+						Game.get().setGameState(GameState.STOPPED);  
+						player.sendMessage(ChatColor.GOLD+"Spiel gestoppt."); 
+					}
+					else if(cmd.equalsIgnoreCase("setDuration")){
+						Settings.get().setGameDuration(Integer.parseInt(args[1])); 
+						player.sendMessage(ChatColor.GOLD+"Spieldauer auf "+ChatColor.RED+""+args[1]+ChatColor.GOLD+" Sekunden gesetzt."); 
+					}
+					else if(cmd.equalsIgnoreCase("clearSpawns")){ 
+						 Settings.get().clearSpawnLocations(); 
+						 player.sendMessage(ChatColor.GOLD+"Spawns geloescht."); 
+					} 
+					else {
+						unknownAdminCommand = true; 
+					}
+					
+					if((unknownUserCommand && !(sender.hasPermission("instagib.admin"))) || (unknownUserCommand && unknownAdminCommand)){
+						printHelp(sender); 
+					}
+				} 
+				
 			}
-			if(sender.hasPermission("instagib.admin")){
-				if(cmd.equalsIgnoreCase("addSpawn")){
-					Settings.get().addSpawnLocation(player.getLocation()); 
-					player.sendMessage(ChatColor.GOLD+"Spawn hinzugef\u00FCgt."); 
-				}
-				else if(cmd.equalsIgnoreCase("stop")){
-					Game.get().setGameState(GameState.STOPPED);  
-					player.sendMessage(ChatColor.GOLD+"Spiel gestoppt."); 
-				}
-				else if(cmd.equalsIgnoreCase("setDuration")){
-					Settings.get().setGameDuration(Integer.parseInt(args[1])); 
-					player.sendMessage(ChatColor.GOLD+"Spieldauer auf "+ChatColor.RED+""+args[1]+ChatColor.GOLD+" Sekunden gesetzt."); 
-				}
-				else{
-					player.sendMessage("Unbekannter Befehl."); 
-				}
+			else { 
+				 printHelp(sender); 
 			} 
-			
-			return true; 
-		}
+			return true;  
+		} 
 		return false; 
 	}
 
+	private void printHelp(CommandSender player){
+		if(player.hasPermission("instagib.admin")){
+			player.sendMessage("Unbekannter Befehl. \n /instagib [addSpawn, stop, setDuration, clearSpawns]"); 
+		}
+		else { 
+			player.sendMessage("Unbekannter Befehl. \n Befehle : '/instagib leave' "); 
+		}
+	}
+	
 	public static Instagib get() {
 		return instance;
 	}
