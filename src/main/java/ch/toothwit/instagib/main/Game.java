@@ -190,9 +190,9 @@ public class Game implements LobbyEventHandler {
 
 		Collections.sort(ranked, new Comparator<GamePlayer>() {
 			public int compare(GamePlayer o1, GamePlayer o2) {
-				if (calcKD(o1.kills, o2.deaths) == calcKD(o2.kills, o2.deaths)) 
+				if (calcKD(o1.kills, o1.deaths) == calcKD(o2.kills, o2.deaths)) 
 					return 0;
-				return calcKD(o1.kills, o2.deaths) > calcKD(o2.kills, o2.deaths) ? -1 : 1;
+				return calcKD(o1.kills, o1.deaths) > calcKD(o2.kills, o2.deaths) ? -1 : 1;
 			}
 		});
 
