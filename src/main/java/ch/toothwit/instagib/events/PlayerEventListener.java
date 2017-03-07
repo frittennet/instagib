@@ -119,6 +119,8 @@ public class PlayerEventListener implements Listener {
 	        Material.REDSTONE, 
 	        Material.BARRIER, 
 	        Material.TRIPWIRE, 
+	        Material.STONE_BUTTON, 
+	        Material.WOOD_BUTTON, 
 	        Material.TRIPWIRE_HOOK, 
 	        Material.LONG_GRASS, 
 	        Material.LADDER, 
@@ -133,6 +135,7 @@ public class PlayerEventListener implements Listener {
 	        Material.REDSTONE_TORCH_OFF, 
 	        Material.REDSTONE_TORCH_ON, 
 	        Material.CROPS, 
+	        Material.LEVER 
 	    )
 	); 
 	
