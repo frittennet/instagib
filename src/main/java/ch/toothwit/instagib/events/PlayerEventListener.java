@@ -1,7 +1,9 @@
 package ch.toothwit.instagib.events;
 
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -23,13 +25,16 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import ch.toothwit.instagib.main.Game;
 import ch.toothwit.instagib.main.GamePlayer;
 import ch.toothwit.instagib.main.GameState;
+import ch.toothwit.instagib.main.Instagib;
 import ch.toothwit.instagib.main.Target;
 import ch.toothwit.instagib.main.Util;
 import ch.toothwit.lobby.main.LobbyAPI;
@@ -48,7 +53,15 @@ public class PlayerEventListener implements Listener {
 			event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 2, false, false)); 
 		} 
 	} 
-	
+	 
+	@EventHandler 
+	public void onPlayerQuitEvent(PlayerQuitEvent event) { 
+        Player p = event.getPlayer(); 
+	    p.getInventory().clear(); 
+        p.setResourcePack("http://collab.toothwit.ch/emptyPack.zip"); 
+        // Util.SendToBungeeServer(LobbyAPI.getBungeeLobbyServer(), p); 
+	} 
+	 
 	@EventHandler
 	public void onFoodLevelChangeEvent(FoodLevelChangeEvent event){           
 		event.setCancelled(true);
@@ -95,6 +108,34 @@ public class PlayerEventListener implements Listener {
 		event.setJoinMessage(""); 
 	}
 	
+	private static Set<Material> transparentMaterial = new HashSet<Material>(
+	    Arrays.asList(
+	        Material.WATER, 
+	        Material.STATIONARY_WATER, 
+	        Material.AIR, 
+	        Material.LAVA, 
+	        Material.STATIONARY_LAVA, 
+	        Material.VINE, 
+	        Material.REDSTONE, 
+	        Material.BARRIER, 
+	        Material.TRIPWIRE, 
+	        Material.TRIPWIRE_HOOK, 
+	        Material.LONG_GRASS, 
+	        Material.LADDER, 
+	        Material.SUGAR_CANE_BLOCK, 
+	        Material.YELLOW_FLOWER, 
+	        Material.RED_ROSE, 
+	        Material.RED_MUSHROOM, 
+	        Material.BROWN_MUSHROOM, 
+	        Material.DOUBLE_PLANT, 
+	        Material.SAPLING, 
+	        Material.TORCH, 
+	        Material.REDSTONE_TORCH_OFF, 
+	        Material.REDSTONE_TORCH_ON, 
+	        Material.CROPS, 
+	    )
+	); 
+	
 	@EventHandler 
 	public void onPlayerUse(PlayerInteractEvent event){ 
 		if(Game.get().getGameState() == GameState.RUNNING){ 
@@ -114,7 +155,7 @@ public class PlayerEventListener implements Listener {
 						double blockDistance = maxDistance; 
 						double targetDistance = maxDistance; 
 						
-						Block b = player.getTargetBlock((HashSet<Byte>) null, 1000); 
+						Block b = player.getTargetBlock(transparentMaterial, 1000); 
 						if(b != null){
 							blockDistance = b.getLocation().distance(headLocation); 
 						}
