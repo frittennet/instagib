@@ -217,7 +217,7 @@ public class Game implements LobbyEventHandler {
 			public void run() {
 				for (Player p : Bukkit.getOnlinePlayers()) {
 					p.getInventory().clear();
-					p.setResourcePack("http://collab.toothwit.ch/emptyPack.zip");
+					// p.setResourcePack("http://collab.toothwit.ch/emptyPack.zip"); Resetting the Resource Pack is now handled by another plugin ( more reliable ) 
 					Util.SendToBungeeServer(LobbyAPI.getBungeeLobbyServer(), p);
 				}
 				Game.get().reload();

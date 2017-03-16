@@ -58,8 +58,7 @@ public class PlayerEventListener implements Listener {
 	public void onPlayerQuitEvent(PlayerQuitEvent event) { 
         Player p = event.getPlayer(); 
 	    p.getInventory().clear(); 
-        p.setResourcePack("http://collab.toothwit.ch/emptyPack.zip"); 
-        // Util.SendToBungeeServer(LobbyAPI.getBungeeLobbyServer(), p); 
+        
 	} 
 	 
 	@EventHandler
